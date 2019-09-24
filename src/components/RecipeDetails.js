@@ -5,7 +5,7 @@ export default class RecipeDetails extends React.Component{
         return(
             <div>
                 
-                {console.log(this.props.recipe)}
+                {this.props.recipe.nome}
                    
             </div>
         )

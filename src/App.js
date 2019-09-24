@@ -16,14 +16,25 @@ export default class App extends React.Component{
       //console.log(recipeApi.getRecipes(this.state.start,this.state.end));
       const recipe = await recipeApi.getRecipeById('5744eff20ca7832b5c745a48');
       this.setState({recipe});
-      //console.log(recipe);
     });
     
   }
 
-  render(){
-    return(
-      <RecipeDetails recipe={this.state.recipe}></RecipeDetails>
-    );
+
+/*componentDidMount(){
+  const end = 1;
+  this.setState({end}, () =>{
+    //console.log(recipeApi.getRecipes(this.state.start,this.state.end));
+    const recipe = recipeApi.getRecipeById('5744eff20ca7832b5c745a48');
+    this.setState({recipe});
+    //console.log(recipe);
+  });
+  
+}*/
+  render(){    
+    return (
+      this.state.recipe !== undefined ? 
+        <RecipeDetails recipe={this.state.recipe}></RecipeDetails> : <div>Aguarde</div>
+    )
   }
 }
