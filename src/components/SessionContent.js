@@ -4,10 +4,9 @@ export default class SessionContent extends React.Component{
     render(){
         return(
             <React.Fragment>
-                {/*console.log(this.props.sessionContent)*/}
-                <div>
-                    {this.props.sessionContent}
-                </div>
+                {/*console.log(this.props.sessionContent)*/}                
+                {this.props.sessionContent}            
+                <br/>
             </React.Fragment>
         )
     }

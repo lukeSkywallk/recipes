@@ -3,16 +3,11 @@ import recipeApi from './api/recipeApi.js';
 //import RecipeDetails from './components/recipeDetails.js';
 import ListRecipe from './components/listRecipe.js'
 
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-
 export default class App extends React.Component{
 
   state = {
     start: 0,
-    end: 4,
+    end: 500,
     recipe: undefined,
     listRecipes: undefined
   }
@@ -36,25 +31,8 @@ export default class App extends React.Component{
       /*this.state.recipe !== undefined ? 
         <RecipeDetails recipe={this.state.recipe}></RecipeDetails> : <div>Aguarde</div>*/        
 
-        /*this.state.listRecipes !== undefined ?
-        <ListRecipe listRecipes={this.state.listRecipes}></ListRecipe> : <div>Aguarde</div>
-        */
-
-       <ExpansionPanel>
-       <ExpansionPanelSummary
-
-         aria-controls="panel1a-content"
-         id="panel1a-header">
-         <Typography >Expansion Panel 1</Typography>
-       </ExpansionPanelSummary>
-       <ExpansionPanelDetails>
-         <Typography>
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-           sit amet blandit leo lobortis eget.
-         </Typography>
-       </ExpansionPanelDetails>
-     </ExpansionPanel>     
-          
+        this.state.listRecipes !== undefined ?
+        <ListRecipe listRecipes={this.state.listRecipes}></ListRecipe> : <div>Aguarde</div>         
     )
   }
 }
