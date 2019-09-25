@@ -1,40 +1,39 @@
 import React from 'react';
-import recipeApi from './api/RecipeApi.js';
-import RecipeDetails from './components/RecipeDetails.js';
+import recipeApi from './api/recipeApi.js';
+//import RecipeDetails from './components/recipeDetails.js';
+import ListRecipe from './components/listRecipe.js'
 
 export default class App extends React.Component{
 
   state = {
     start: 0,
-    end: 5,
+    end: 4,
     recipe: undefined,
+    listRecipes: undefined
   }
 
-  componentDidMount(){
-    const end = 1;
+  async componentDidMount(){
+    /*const end = 1;
     this.setState({end}, async () =>{
       //console.log(recipeApi.getRecipes(this.state.start,this.state.end));
-      const recipe = await recipeApi.getRecipeById('5744eff20ca7832b5c745a48');
-      this.setState({recipe});
-    });
+      //const recipe = await recipeApi.getRecipeById('5744eff20ca7832b5c745a48');
+      const listRecipes = await recipeApi.getRecipes(this.state.start, this.state.end)
+      this.setState({listRecipes});
+    });*/
+
+    const listRecipes = await recipeApi.getRecipes(this.state.start, this.state.end)
+    this.setState({listRecipes});
     
   }
 
-
-/*componentDidMount(){
-  const end = 1;
-  this.setState({end}, () =>{
-    //console.log(recipeApi.getRecipes(this.state.start,this.state.end));
-    const recipe = recipeApi.getRecipeById('5744eff20ca7832b5c745a48');
-    this.setState({recipe});
-    //console.log(recipe);
-  });
-  
-}*/
   render(){    
     return (
-      this.state.recipe !== undefined ? 
-        <RecipeDetails recipe={this.state.recipe}></RecipeDetails> : <div>Aguarde</div>
+      /*this.state.recipe !== undefined ? 
+        <RecipeDetails recipe={this.state.recipe}></RecipeDetails> : <div>Aguarde</div>*/        
+        
+        this.state.listRecipes !== undefined ?
+        <ListRecipe listRecipes={this.state.listRecipes}></ListRecipe> : <div>Aguarde</div>
+          
     )
   }
 }

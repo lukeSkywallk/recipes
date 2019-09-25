@@ -1,5 +1,5 @@
 import React from 'react';
-import SessionContent from './ListSession.js';
+import SessionContent from './sessionContent';
 
 export default class ListSessionContent extends React.Component{
     render(){
