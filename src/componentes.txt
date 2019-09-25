@@ -1,0 +1,7 @@
+recipe
+    _id
+        $oid
+    nome
+    secao []
+        nome
+        conteudo []            
