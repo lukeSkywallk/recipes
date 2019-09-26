@@ -22,6 +22,7 @@ export default class App extends React.Component{
     });*/
 
     const listRecipes = await recipeApi.getRecipes(this.state.start, this.state.end)
+    
     this.setState({listRecipes});
     
   }
