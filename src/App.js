@@ -1,15 +1,15 @@
 import React from 'react';
 import recipeApi from './api/recipeApi.js';
-//import RecipeDetails from './components/recipeDetails.js';
-import ListRecipe from './components/listRecipe.js'
+import ListRecipe from './components/listRecipe.js';
+import Paginator from './components/paginator.js';
 
 export default class App extends React.Component{
 
   state = {
     start: 0,
-    end: 500,
+    end: 5,
     recipe: undefined,
-    listRecipes: undefined
+    returnListRecipes: undefined
   }
 
   async componentDidMount(){
@@ -21,9 +21,8 @@ export default class App extends React.Component{
       this.setState({listRecipes});
     });*/
 
-    const listRecipes = await recipeApi.getRecipes(this.state.start, this.state.end)
-    
-    this.setState({listRecipes});
+    const returnListRecipes = await recipeApi.getRecipes(this.state.start, this.state.end)
+    this.setState({returnListRecipes});
     
   }
 
@@ -32,8 +31,13 @@ export default class App extends React.Component{
       /*this.state.recipe !== undefined ? 
         <RecipeDetails recipe={this.state.recipe}></RecipeDetails> : <div>Aguarde</div>*/        
 
-        this.state.listRecipes !== undefined ?
-        <ListRecipe listRecipes={this.state.listRecipes}></ListRecipe> : <div>Aguarde</div>         
+        this.state.returnListRecipes !== undefined ?
+        (
+        <React.Fragment>
+          <ListRecipe listRecipes={this.state.returnListRecipes.list}></ListRecipe>
+          <Paginator returnListRecipes={this.state.returnListRecipes}></Paginator>
+          
+        </React.Fragment>) : <div>Aguarde</div>         
     )
   }
 }

@@ -3,7 +3,11 @@ import listRecipesJSON from '../data/recipes.json';
 const recipeApi = {};
 
 recipeApi.getRecipes = (start, end) => {    
-    return listRecipesJSON.splice(start, end);
+    const list = listRecipesJSON.splice(start, end)
+    return {
+        'list': list,
+        'total': listRecipesJSON.length
+    };
 };
 
 recipeApi.getRecipeById = (recipeId) => {
