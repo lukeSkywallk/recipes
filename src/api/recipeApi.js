@@ -2,8 +2,8 @@ import listRecipesJSON from '../data/recipes.json';
 
 const recipeApi = {};
 
-recipeApi.getRecipes = (start, end) => {    
-    const list = listRecipesJSON.splice(start, end)
+recipeApi.getRecipes = (start, numberElements) => {        
+    const list = listRecipesJSON.slice(start*numberElements, start*numberElements + numberElements)    
     return {
         'list': list,
         'total': listRecipesJSON.length

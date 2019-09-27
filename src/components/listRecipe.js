@@ -6,7 +6,7 @@ export default class ListRecipe extends React.Component{
         return(
             <React.Fragment>
                 {
-                    this.props.listRecipes.map((recipe, index) =>
+                    this.props.listRecipes.map((recipe, index) =>                    
                         <RecipeDetails key={index} recipe={recipe}></RecipeDetails>                        
                     )
                 }
