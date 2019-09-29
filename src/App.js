@@ -37,33 +37,25 @@ export default class App extends React.Component{
     this.setState(({actualPaginatorShowing}),async () =>{
       const returnListRecipes = await recipeApi.getRecipes(this.state.actualPaginatorShowing, this.state.numberElements)
       this.setState({returnListRecipes});
-      const start = 12;
-      this.setState({start});
+      //const start = 1;
+      //this.setState({start});
 
-      /*if(actualPaginatorShowing % 5 == 1){
+      /*if(actualPaginatorShowing % 5 === 1){
         const start = 1;
-        this.setState({start});
-    }else if(actualPaginatorShowing % 5 == 0){
+        this.setState({start});*/
+      /*}else*/ if(actualPaginatorShowing % 5 === 0){
       
-      const start = (actualPaginatorShowing / 5) +1;      
-      this.setState({start});        
-    }*/
+        const start = actualPaginatorShowing;//(actualPaginatorShowing / 5) +1;      
+        this.setState({start});        
+      }
 
 
 
     });
   }
 
-  teste(){
-    const start = 4;
-    this.setState({start});
-  }
-
   render(){    
     return (
-      /*this.state.recipe !== undefined ? 
-        <RecipeDetails recipe={this.state.recipe}></RecipeDetails> : <div>Aguarde</div>*/        
-
         this.state.returnListRecipes !== undefined ?
         (
         <React.Fragment>
