@@ -25,11 +25,13 @@ function App(){
     },[startingPaginationShowing, numberElementsPerPage]);  */
   
     const actionGoPage = async (pageNumberToGo) => {
-        setActualPaginationShowing((pageNumberToGo), async () =>{
+        /*setActualPaginationShowing((pageNumberToGo), async () =>{
           const returnDataListRecipes = await recipeApi.getRecipes(startingPaginationShowing, numberElementsPerPage);
           setDataListRecipes(returnDataListRecipes);
           setStartingPaginationShowing(pageNumberToGo);
-        });        
+        });        */
+        setActualPaginationShowing(pageNumberToGo);
+        setStartingPaginationShowing(pageNumberToGo);
     }
 
   return (
