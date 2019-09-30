@@ -1,13 +1,13 @@
 import React from 'react'
 
-export default class SessionContent extends React.Component{
-    render(){
-        return(
-            <React.Fragment>
-                {/*console.log(this.props.sessionContent)*/}                
-                {this.props.sessionContent}            
-                <br/>
-            </React.Fragment>
-        )
-    }
+function SessionContent({sessionContent}){
+
+    return(
+        <React.Fragment>
+            {sessionContent}
+            <br/>
+        </React.Fragment>
+    )
 }
+
+export default SessionContent;

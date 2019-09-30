@@ -1,8 +1,55 @@
-import React from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import recipeApi from './api/recipeApi.js';
 import ListRecipe from './components/listRecipe.js';
 import Paginator from './components/paginator.js';
-import Button from '@material-ui/core/Button';
+
+function App(){
+  const [startingPaginationShowing, setStartingPaginationShowing] = useState(1);
+  const [actualPaginationShowing, setActualPaginationShowing] = useState(1);
+  const [numberElementsPerPage, setNumberElementsPerPage] = useState(5);
+  const [dataListRecipes, setDataListRecipes] = useState([]);
+
+  useEffect(() => {
+    async function fetchData(){
+      const returnDataListRecipes = await recipeApi.getRecipes(startingPaginationShowing, numberElementsPerPage);
+      setDataListRecipes(returnDataListRecipes);      
+    }
+    fetchData();
+  },[startingPaginationShowing, numberElementsPerPage]);
+
+  /*const actionGoPage = useCallback(
+    async () => {      
+        //const returnDataListRecipes = await recipeApi.getRecipes(start, numberElementsPerPage);
+        //setDataListRecipes(returnDataListRecipes);      
+        console.log('rodou');
+    },[startingPaginationShowing, numberElementsPerPage]);  */
+  
+    const actionGoPage = async (pageNumberToGo) => {
+        setActualPaginationShowing((pageNumberToGo), async () =>{
+          const returnDataListRecipes = await recipeApi.getRecipes(startingPaginationShowing, numberElementsPerPage);
+          setDataListRecipes(returnDataListRecipes);
+          setStartingPaginationShowing(pageNumberToGo);
+        });        
+    }
+
+  return (
+    dataListRecipes.list !== undefined ?
+      <React.Fragment>
+        <ListRecipe listRecipes={dataListRecipes.list}></ListRecipe>
+        <Paginator
+          numberTotalRecipes={dataListRecipes.length} 
+          startingPaginationShowing={startingPaginationShowing} 
+          actualPaginationShowing={actualPaginationShowing}
+          actionGoPage={actionGoPage}></Paginator>
+      </React.Fragment>:<div>Aguarde</div>
+  );
+}
+
+export default App;
+/*import React from 'react';
+import recipeApi from './api/recipeApi.js';
+import ListRecipe from './components/listRecipe.js';
+import Paginator from './components/paginator.js';
 
 export default class App extends React.Component{  
 
@@ -16,41 +63,48 @@ export default class App extends React.Component{
 
   constructor(props){
     super(props)
-    this.handler = this.handler.bind(this);
+    this.actionGoPage = this.actionGoPage.bind(this);
+    this.actionBackPage = this.actionBackPage.bind(this);
+    this.actionForwardPage = this.actionForwardPage.bind(this);
   }
 
   async componentDidMount(){
-    /*const end = 1;
-    this.setState({end}, async () =>{
-      //console.log(recipeApi.getRecipes(this.state.start,this.state.end));
-      //const recipe = await recipeApi.getRecipeById('5744eff20ca7832b5c745a48');
-      const listRecipes = await recipeApi.getRecipes(this.state.start, this.state.end)
-      this.setState({listRecipes});
-    });*/
-
     const returnListRecipes = await recipeApi.getRecipes(this.state.start, this.state.numberElements)
-    this.setState({returnListRecipes});
-    
+    this.setState({returnListRecipes});    
   }
 
-  handler(actualPaginatorShowing){
+  actionGoPage(actualPaginatorShowing){
+    this.setState(({actualPaginatorShowing}),async () =>{
+      const returnListRecipes = await recipeApi.getRecipes(this.state.actualPaginatorShowing, this.state.numberElements)
+      this.setState({returnListRecipes});      
+      const start = actualPaginatorShowing;//(actualPaginatorShowing / 5) +1;      
+      this.setState({start});
+    });
+  }
+
+  actionBackPage(actualPaginatorShowing){    
+    actualPaginatorShowing = actualPaginatorShowing - 1;
     this.setState(({actualPaginatorShowing}),async () =>{
       const returnListRecipes = await recipeApi.getRecipes(this.state.actualPaginatorShowing, this.state.numberElements)
       this.setState({returnListRecipes});
-      //const start = 1;
-      //this.setState({start});
-
-      /*if(actualPaginatorShowing % 5 === 1){
-        const start = 1;
-        this.setState({start});*/
-      /*}else*/ if(actualPaginatorShowing % 5 === 0){
+     
       
-        const start = actualPaginatorShowing;//(actualPaginatorShowing / 5) +1;      
-        this.setState({start});        
-      }
+      const start = actualPaginatorShowing;
+        this.setState({start});
+      this.setState({actualPaginatorShowing});
+    });
+  }
 
-
-
+  actionForwardPage(actualPaginatorShowing){
+    actualPaginatorShowing = actualPaginatorShowing + 1;
+    this.setState(({actualPaginatorShowing}),async () =>{
+      const returnListRecipes = await recipeApi.getRecipes(this.state.actualPaginatorShowing, this.state.numberElements)
+      this.setState({returnListRecipes});
+     
+      
+      const start = actualPaginatorShowing;
+        this.setState({start});
+      this.setState({actualPaginatorShowing});
     });
   }
 
@@ -59,12 +113,16 @@ export default class App extends React.Component{
         this.state.returnListRecipes !== undefined ?
         (
         <React.Fragment>
-          <div>{this.state.start}</div>
-          <Button onClick={() => this.teste()}>2</Button>
           <ListRecipe listRecipes={this.state.returnListRecipes.list}></ListRecipe>
-          <Paginator returnListRecipes={this.state.returnListRecipes} start={this.state.start} action={this.handler}></Paginator>
+          <Paginator 
+            returnListRecipes={this.state.returnListRecipes} 
+            start={this.state.start} 
+            actualPaginatorShowing={this.state.actualPaginatorShowing} 
+            actionGoPage={this.actionGoPage}
+            actionBackPage={this.actionBackPage}
+            actionForwardPage={this.actionForwardPage}></Paginator>
           
         </React.Fragment>) : <div>Aguarde</div>         
     )
   }
-}
+}*/
