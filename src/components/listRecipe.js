@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import RecipeDetails from './recipeDetails.js';
 
 function ListRecipe({listRecipes}){
-
-    return(   
+    //{console.log(listRecipes)}
+    return(
+        
         listRecipes.map((recipe, key) => (
             <RecipeDetails key={key} recipe={recipe}></RecipeDetails>
         ))

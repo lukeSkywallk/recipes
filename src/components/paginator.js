@@ -1,30 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import InputBase from '@material-ui/core/InputBase';
 
-function Paginator({numberTotalRecipes, startingPaginationShowing, actualPaginatorShowing, actionGoPage}){
+function Paginator({numberTotalRecipes, startingPaginationShowing, actualPaginationShowing, actionGoPage}){
 
-    const goToPage = (pageNumberToGo) =>{
+    const [backButtonPagination, setBackButtonPagination] = useState(null);
+    const [forwardButtonPagination, setForwardButtonPagination] = useState(null);
+    const [firstPageButtonPagination, setFirstPageButtonPagination] = useState(null);
+    const [lastPageButtonPagination, setLastPageButtonPagination] = useState(null);
+    const [pageNumberToGo, setPageNumberToGo] = useState(0);
+
+    useEffect(() =>{
         actionGoPage(pageNumberToGo);
-        //console.log(pageNumberToGo);
+        setBackButtonPagination(actualPaginationShowing + 1 > 1 ? <Button onClick={() => setPageNumberToGo(actualPaginationShowing - 1)}>{"<"}</Button> : undefined);        
+        setForwardButtonPagination(actualPaginationShowing + 1 < Math.ceil((numberTotalRecipes) / 5) ? <Button onClick={() => setPageNumberToGo(actualPaginationShowing + 1)}>{">"}</Button> : undefined);
+        setFirstPageButtonPagination(actualPaginationShowing + 1 !== 1 ? <Button onClick={() => setPageNumberToGo(1)}>{"<<"}</Button> : undefined);
+        setLastPageButtonPagination(actualPaginationShowing + 1 < Math.ceil((numberTotalRecipes) / 5) ? <Button onClick={() => setPageNumberToGo(Math.ceil(numberTotalRecipes / 5))}>{">>"}</Button> : undefined);            
+    },[actionGoPage, pageNumberToGo, actualPaginationShowing, setPageNumberToGo, numberTotalRecipes]);
 
+    const parseValueElementToInt = (value) =>{
+        var convertedValue = undefined;
+        try{
+            console.log(value);
+            convertedValue = parseInt(value);
+        }catch(e){
+            convertedValue = parseInt(0);
+        }
+        return convertedValue;
     }
 
-    return(
+    const handleValueChange = (value) =>{
+        const re = /^[0-9\b]+$/;
+
+    // if value is not blank, then test the regex
+
+        if (value === '' || re.test(value)) {
+            return value;
+        }
+        return 1;
+    }
+
+    return(           
         <Grid container spacing={3} justify="center">
             <Grid item xs={12} md={6}>
-                <Grid container direction="column" alignItems="center">
+                <Grid container direction="column" alignItems="center">                
                     <ButtonGroup size="small" aria-label="small outlined button group">                        
+                        <InputBase
+                            placeholder="Pesquisa"
+                            onChange={(e) => setPageNumberToGo(handleValueChange(e.target.value) - 1)}/>
+                        {firstPageButtonPagination}
+                        {backButtonPagination}
                         {
-                            Array.from(Array(Math.ceil((numberTotalRecipes > 25 ? numberTotalRecipes : 25) / 5)).keys()).map((pageNumber, key) =>
+                            <Button>
+                                {actualPaginationShowing + 1}
+                            </Button>
+                        }
+                        {/*
+                            Array.from(Array(Math.ceil((numberTotalRecipes > 25 ? 25 : numberTotalRecipes) / 5)).keys()).map((pageNumber, key) =>
                                 <Button 
                                     key={key}
-                                    onClick={() => goToPage(startingPaginationShowing + pageNumber)}>
-                                        {startingPaginationShowing + pageNumber}
+                                    onClick={() => setPageNumberToGo(startingPaginationShowing + pageNumber)}>
+                                        {startingPaginationShowing + pageNumber} {numberTotalRecipes} {Math.ceil((numberTotalRecipes > 25 ? 25 : numberTotalRecipes) / 5)}
                                 </Button>
-                            )
+                            )*/
                         }
+                        {forwardButtonPagination}
+                        {lastPageButtonPagination}
                     </ButtonGroup>
                 </Grid>
             </Grid>
@@ -33,68 +76,3 @@ function Paginator({numberTotalRecipes, startingPaginationShowing, actualPaginat
 }
 
 export default Paginator;
-/*
-export default class Paginator extends React.Component{
-    constructor(props){
-        super(props);
-        this.numberTotalRecipes = this.props.returnListRecipes.total;
-        this.numberPagesShowing = this.numberTotalRecipes > 25 ? 25 : this.numberTotalRecipes;
-        this.start = this.props.start;
-    }
-
-    goToPage(clicado){
-        this.props.actionGoPage(clicado);
-    }
-
-    back(clicked){
-        this.props.actionBackPage(clicked);
-    }
-
-    forward(clicked){
-        this.props.actionForwardPage(clicked);
-    }
-
-    render(){
-        var backButtonPagination = undefined;
-        var forwardButtonPagination = undefined;
-        var firstPageButtonPagination = undefined;
-        var lastPageButtonPagination = undefined;
-        if(this.props.actualPaginatorShowing > 1){
-            backButtonPagination = <Button onClick={() => this.back(this.props.actualPaginatorShowing)}>&lt;</Button>
-        }
-        if(this.props.actualPaginatorShowing < Math.ceil(this.numberTotalRecipes / 5)){
-            forwardButtonPagination = <Button onClick={() => this.forward(this.props.actualPaginatorShowing)}>&gt;</Button>
-        }
-
-        if(this.props.firstPageButtonPagination !== 1){
-            firstPageButtonPagination = <Button onClick={() => this.goToPage(1)}>&lt;&lt;</Button>
-        }
-
-        if(this.props.lastPageButtonPagination !== Math.ceil(this.numberTotalRecipes / 5)){
-            lastPageButtonPagination = <Button onClick={() => this.goToPage(Math.ceil(this.numberTotalRecipes / 5))}>&gt;&gt;</Button>
-        }
-        return(
-            <Grid container spacing={3} justify="center">
-                <Grid item xs={12} md={6}>
-                    <Grid container direction="column" alignItems="center">
-                        <ButtonGroup size="small" aria-label="small outlined button group">
-                            {firstPageButtonPagination}
-                            {backButtonPagination}
-                            {                                
-                                Array.from(Array(Math.ceil(this.numberPagesShowing / 5)).keys()).map((num, key) =>                                        
-                                        <Button 
-                                            key={key} 
-                                            onClick={() => this.goToPage(this.props.start+num)}>
-                                                {this.props.start + num}
-                                        </Button>
-                                )
-                            }
-                            {forwardButtonPagination}
-                            {lastPageButtonPagination}
-                        </ButtonGroup>
-                    </Grid>
-                </Grid>
-            </Grid>
-        )
-    }
-}*/
