@@ -2,8 +2,8 @@ import React from 'react';
 import RecipeDetails from './recipeDetails.js';
 import List from '@material-ui/core/List';
 
+
 function ListRecipe({listRecipes}){
-    //{console.log(listRecipes)}
     return(
         <List>
             {

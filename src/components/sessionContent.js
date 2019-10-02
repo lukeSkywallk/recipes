@@ -5,7 +5,7 @@ function SessionContent({sessionContent}){
 
     return(
         <React.Fragment>
-            <ListItem button>
+            <ListItem style={{marginLeft: '5%'}} button>                
                 {sessionContent}
             </ListItem>
         </React.Fragment>

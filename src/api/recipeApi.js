@@ -11,12 +11,9 @@ recipeApi.getRecipes = (start, numberElements, searchTerm) => {
     }else{
         list = recipeApi.getRecipeByName(searchTerm);
         totalElements = list.length;
-        //console.log(totalElements);
-        //console.log(list);
         list = list.slice(start * numberElements, (start * numberElements) + numberElements);        
         
     }    
-    console.log(list)
     return {
         'list': list,
         'total': totalElements
