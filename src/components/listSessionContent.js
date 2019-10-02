@@ -1,11 +1,17 @@
 import React from 'react';
 import SessionContent from './sessionContent';
+import { List } from '@material-ui/core';
 
 function ListSessionContent({listSessionContent}){
     return(
-        listSessionContent.map((sessionContent, key) => (
-            <SessionContent key={key} sessionContent={sessionContent}></SessionContent>
-        ))
+        <List>
+            {
+                listSessionContent.map((sessionContent, key) => (
+                    <SessionContent key={key} sessionContent={sessionContent}></SessionContent>
+                )) 
+            }
+        </List>
+        
     )
 }
 
