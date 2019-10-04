@@ -1,4 +1,24 @@
+# Recipes
+
+A ReactJS app for learning purpose that gets data from a json file.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## [Live Demo] (https://lukeskywallk.github.io/recipes/)
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+## Prerequisites
+-npm
+-yarn
+
+## Installing
+-npm install
+
+## Deployment
+-yarn start
 
 ## Available Scripts
 
@@ -37,32 +57,14 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## License
+This project is licensed under the MIT License - see the LICENSE file for details
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
+Any improvement woud be nice.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Authors
+    **Edilson Rodrigues** - *Initial work* - [lukeSkywallk](https://github.com/lukeSkywallk)
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Acknowledgments
+- **Adriano Ferreira** - *Created the afrodite.js, here referenced as recipes.json, that contains all the recipes data* - [adrianosferreira](https://github.com/adrianosferreira)
