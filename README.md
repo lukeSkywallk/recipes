@@ -11,14 +11,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ## Prerequisites
--npm
--yarn
+- npm
+- yarn
 
 ## Installing
--npm install
+- npm install
 
 ## Deployment
--yarn start
+- yarn start
 
 ## Available Scripts
 
@@ -64,7 +64,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 Any improvement woud be nice.
 
 ## Authors
-    **Edilson Rodrigues** - *Initial work* - [lukeSkywallk](https://github.com/lukeSkywallk)
+-    **Edilson Rodrigues** - *Initial work* - [lukeSkywallk](https://github.com/lukeSkywallk)
 
 ## Acknowledgments
 - **Adriano Ferreira** - *Created the afrodite.js, here referenced as recipes.json, that contains all the recipes data* - [adrianosferreira](https://github.com/adrianosferreira)
